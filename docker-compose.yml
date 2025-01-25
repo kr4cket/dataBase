@@ -55,3 +55,26 @@ services:
       options:
         max-size: "200k"
         max-file: "10"
+
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4:7.2
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "${DB_DEFAULT_EMAIL}"
+      PGADMIN_DEFAULT_PASSWORD: "${DB_DEFAULT_PASSWORD}"
+      PGADMIN_CONFIG_SERVER_MODE: "${DB_CONFIG_SERVER_MODE}"
+    ports:
+      - "${PG_ADMIN_PORT}:${PG_ADMIN_PORT}"
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 1G
+    depends_on:
+      - postgres
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "500k"
+        max-file: "15"
