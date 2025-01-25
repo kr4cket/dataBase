@@ -1,6 +1,6 @@
 CREATE TABLE owners
 (
-    owner_id    UUID       NOT NULL PRIMARY KEY UNIQUE,
+    id    UUID       NOT NULL PRIMARY KEY UNIQUE,
     phone_num   VARCHAR(255) NOT NULL,
     address     VARCHAR(255) NOT NULL,
     second_name VARCHAR(255) NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE garden
     terrain    VARCHAR(255) NOT NULL,
     soil       VARCHAR(255) NOT NULL,
     owner_id   UUID       NOT NULL,
-    FOREIGN KEY (owner_id) REFERENCES owners (owner_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    FOREIGN KEY (owner_id) REFERENCES owners (id) ON DELETE RESTRICT ON UPDATE CASCADE,
     PRIMARY KEY (owner_id, garden_num)
 )
 ;
